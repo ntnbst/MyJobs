@@ -12,7 +12,7 @@ export default function TextInput({ id, type="text", value, onChange, label, pla
         {forgotPass && <Link to={ROUTE_FORGOT_PASSOWORD}>{forgotPass}</Link>}
       </Flex>
       <input value={value} onChange={onChange} id={id} type={type} placeholder={placeholder} />
-      <small>{warningMessage}</small>
+      <small>{warningMessage || <span style={{ opacity: 0 }}>.</span>}</small>
 
       <style jsx>{`
         input {
