@@ -33,9 +33,9 @@ export default function PostedJobs() {
   if (postedJobs == null) return <h1>Loading...</h1>
 
   return (
-    <Layout sectionalBgHeight="15rem" padding="4rem 1.6rem">
+    <Layout headerCTAOptions={[ {text: 'Post A Job', cta: ROUTE_POST_JOB} ]} sectionalBgHeight="15rem" padding="4rem 1.6rem">
+      <p className="text-white">Home</p>
       <h1 className="text--md text-white">Job Posted by you</h1>
-      <p>Home</p>
       {postedJobs.message 
       ? <NoJobsPostedPlaceholder />
       : <Grid col={4}>
@@ -67,7 +67,7 @@ const CandidatesPerJob = ({ jobId, onDismiss }) => {
     <Modal maxWidth="69rem" absolute onDismiss={onDismiss}>
       <h1>Applicants for this job</h1>
       <hr/>
-      <p>Total {candidates.message ? candidates.data.length : 'number of app'} Applicants</p>
+      <p>Total {candidates.message ? 0 : candidates.data.length} Applicants</p>
 
       <div className="candidates-wrapper">
         {candidates.message

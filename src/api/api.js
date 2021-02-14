@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { clearAccessToken, setAccessToken, isUserLoggedIn, getAccessToken, setUserRole } from '../localstorage'
+import { clearAccessToken, setAccessToken, isUserLoggedIn, getAccessToken, setUserRole, setUserName } from '../localstorage'
 
 const BASE_URL = 'https://jobs-api.squareboat.info/api/v1'
 
 const API_ENDPOINTS = {
   'register': '/auth/register',
   'login': '/auth/login',
+  'resetPassword': '/auth/resetpassword',
   'candidates': '/candidates',
   'recruiters': '/recruiters',
   'oneJobCandidate': '/recruiters/jobs',
@@ -74,6 +75,7 @@ export const registerNewUserAPI = async (apiBody) => {
   if (apiResult.data.success) {
     setAccessToken(apiResult.data.data.token)
     setUserRole(apiResult.data.data.userRole)
+    setUserName(apiResult.data.data.name)
   }
   return apiResult
 };
@@ -83,7 +85,18 @@ export const loginAuthAPI = async (apiBody) => {
   if (apiResult.data.success) {
     setAccessToken(apiResult.data.data.token)
     setUserRole(apiResult.data.data.userRole)
+    setUserName(apiResult.data.data.name)
   }
+  return apiResult
+};
+
+export const forgotPasswordAPI = async (email) => {
+  const apiResult = await makeAPIRequest('get', `${API_ENDPOINTS.resetPassword}?email${email}`, {}, {})
+  return apiResult
+};
+
+export const postResetPassowordAPI = async (apiBody) => {
+  const apiResult = await makeAPIRequest('get', API_ENDPOINTS.resetPassword, {}, apiBody)
   return apiResult
 };
 

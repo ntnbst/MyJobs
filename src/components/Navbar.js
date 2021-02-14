@@ -1,8 +1,8 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { theme } from '../constants'
-import { clearAccessToken, isUserLoggedIn } from '../localstorage'
+import { clearAccessToken, getUserName, isUserLoggedIn } from '../localstorage'
 import { ROUTE_LOGIN } from '../routes/routes'
 import Button from './Button'
 import Flex from './Flex'
@@ -13,9 +13,10 @@ export default function Navbar({ isAuthPage, headerCTAOptions }) {
     <header className="nav-wrapper">
       <nav className="navbar">
         <h1 style={{ cursor: 'pointer' }} onClick={() => history.push('/')}>My<span>Jobs</span></h1>
-        <div>
-          {isUserLoggedIn() ? <ProfileButton /> : !isAuthPage && <Button onClick={() => history.push(ROUTE_LOGIN)} background="transparent">Login/Signup</Button>}
-        </div>
+        <Flex>
+          <div>{typeof headerCTAOptions !== 'undefined' && headerCTAOptions.map(op => <Link style={{ color: '#fff', marginRight: '2rem' }} to={op.cta}>{op.text}</Link>)}</div>
+          {isUserLoggedIn() ? <ProfileButton name={getUserName()} /> : !isAuthPage && <Button onClick={() => history.push(ROUTE_LOGIN)} background="transparent">Login/Signup</Button>}
+        </Flex>
       </nav>
 
       <style jsx>{`
@@ -46,18 +47,22 @@ export default function Navbar({ isAuthPage, headerCTAOptions }) {
 }
 
 
-const ProfileButton = () => {
+const ProfileButton = ({ name }) => {
 
   const onClickLogout = () => {
     clearAccessToken()
     toast('You have successfully logged out.')
-    window.location.href = '/'  
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 1000);
   }
+
+  console.log('name', name)
 
   return (
     <div className="profile-btn">
       <Flex justify="space-between">
-        <p className="margin-0">N</p>
+        <p className="margin-0">{name.substr(0,1).toUpperCase()}</p>
         <span className="drop">◣</span>
       </Flex>
 

@@ -14,36 +14,63 @@ import { ROUTE_AVAILABLE_JOBS, ROUTE_LOGIN, ROUTE_POSTED_JOBS } from '../routes/
 export default function SignUp() {
   const history = useHistory()
   const [userRole, setUserRole] = useState(1)
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false)
 
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [skills, setSkills] = useState([])
+  const [skills, setSkills] = useState('')
 
+  const isFormValidated = () => {
+    if (!email) {
+      return false
+    }
+    
+    if (!password) {
+      return false
+    }
+
+    if (!confirmPassword) {
+      return false
+    }
+
+    if (password != confirmPassword) {
+      return false
+    }
+
+    if (!skills) {
+      return false
+    }
+
+    return true
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    setIsSubmitClicked(true)
     const [firstName, lastName] = fullName.split(" ")
-    let customizedFullName = firstName + lastName.toUpperCase()
-    const apiBody = {
-      "email": email,
-      "userRole": userRole, // 0 = recruiter, 1 = candidate 
-      "password": password,
-      "confirmPassword": password,
-      "name": customizedFullName,
-      "skills": skills
+    if (isFormValidated()) {
+      let customizedFullName = firstName + lastName.toUpperCase()
+      const apiBody = {
+        "email": email,
+        "userRole": userRole, // 0 = recruiter, 1 = candidate 
+        "password": password,
+        "confirmPassword": password,
+        "name": customizedFullName,
+        "skills": skills
+      }
+      registerNewUserAPI(apiBody).then(res => {
+        console.log('res.data', res.data)
+        if (res.data.data.userRole == 0) { // recruiter
+          history.push(ROUTE_POSTED_JOBS)
+        } else {
+          history.push(ROUTE_AVAILABLE_JOBS)
+        }
+      })
     }
 
-    registerNewUserAPI(apiBody).then(res => {
-      console.log('res.data', res.data)
-      if (res.data.data.userRole == 0) { // recruiter
-        history.push(ROUTE_POSTED_JOBS)
-      } else {
-        history.push(ROUTE_AVAILABLE_JOBS)
-      }
-    })
   }
 
   console.log('userRole', userRole)
@@ -72,6 +99,7 @@ export default function SignUp() {
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
             placeholder="Enter your full name"
+            warningMessage={isSubmitClicked && !fullName && 'Name is required' }
           />
 
           <TextInput
@@ -80,6 +108,7 @@ export default function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Enter your email"
+            warningMessage={isSubmitClicked && !email && 'Email is required' }
           />
 
           <Flex gap="2rem">
@@ -90,6 +119,7 @@ export default function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               placeholder="Enter your password"
+              warningMessage={isSubmitClicked && !password && 'Password is required' }
             />
 
             <TextInput
@@ -99,15 +129,17 @@ export default function SignUp() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               value={confirmPassword}
               placeholder="Confirm your password"
+              warningMessage={isSubmitClicked && !confirmPassword ? 'This field is required' : password != confirmPassword && 'Passwords do not match' }
             />
           </Flex>
 
           <TextInput
             id="skills"
-            label="Skills"
+            label="Skills*"
             onChange={(e) => setSkills(e.target.value)}
             value={skills}
             placeholder="Enter comma separated skills"
+            warningMessage={isSubmitClicked && !skills && 'Field is Mandatory' }
           />
 
           <div className="text-center">

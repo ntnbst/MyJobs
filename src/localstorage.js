@@ -6,6 +6,14 @@ export function setUserRole(userRole) {
   localStorage.setItem('userRole', userRole);
 }
 
+export function setUserName(name) {
+  localStorage.setItem('name', name);
+}
+
+export function getUserName() {
+  return localStorage.getItem('name');
+}
+
 /** Get saved user token */
 export function getAccessToken() {
   return localStorage.getItem('token');

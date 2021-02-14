@@ -31,7 +31,7 @@ export default function PostJob() {
 
   }
   return (
-    <Layout padding="4rem 1.6rem">
+    <Layout headerCTAOptions={[ {text: 'Posted Jobs by you', cta: ROUTE_POSTED_JOBS} ]} padding="4rem 1.6rem">
       <p className="margin-0 text-white">Home &gt; Post a Job</p>
       <Modal>
         <p className="text--md margin-0">Post a Job</p>

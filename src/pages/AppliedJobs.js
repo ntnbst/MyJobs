@@ -26,7 +26,7 @@ export default function AppliedJobs() {
   if (appliedJobs == null) return 'Loading...'
 
   return (
-    <Layout sectionalBgHeight="15rem" padding="4rem 1.6rem">
+    <Layout headerCTAOptions={[ {text: 'Apply For a job', cta: ROUTE_AVAILABLE_JOBS} ]} sectionalBgHeight="15rem" padding="4rem 1.6rem">
       <p className="margin-0 text-white">Home &gt; Applied Jobs</p>
       <h1 className="text--md text-white">Jobs applied by you</h1>
       {appliedJobs.msg 

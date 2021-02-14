@@ -1,10 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { theme } from '../constants'
+import Flex from './Flex'
+import {ROUTE_FORGOT_PASSOWORD} from '../routes/routes'
 
-export default function TextInput({ id, type="text", value, onChange, label, placeholder, warningMessage }) {
+export default function TextInput({ id, type="text", value, onChange, label, placeholder, warningMessage, forgotPass }) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <Flex justify="space-between">
+        <label htmlFor={id}>{label}</label>
+        {forgotPass && <Link to={ROUTE_FORGOT_PASSOWORD}>{forgotPass}</Link>}
+      </Flex>
       <input value={value} onChange={onChange} id={id} type={type} placeholder={placeholder} />
       <small>{warningMessage}</small>
 

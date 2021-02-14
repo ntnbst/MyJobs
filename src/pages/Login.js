@@ -89,6 +89,7 @@ export default function Login() {
             onChange={handlePasswordChange}
             value={password}
             placeholder="Enter your password"
+            forgotPass="Forgot password"
             warningMessage={isSubmitClicked && !password && 'Password is required' }
           />
           <br/>
