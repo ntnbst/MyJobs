@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": "e62a99ac-76d1-4643-9a9f-6bac4fbb768e",
+    "email": "asdfg@gmail.com",
+    "userRole": 0,
+    "name": "danab",
+    "skills": "HTML, CSS, JS",
+    "updatedAt": "2021-02-14T10:14:57.227Z",
+    "createdAt": "2021-02-14T10:14:57.227Z",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU2MmE5OWFjLTc2ZDEtNDY0My05YTlmLTZiYWM0ZmJiNzY4ZSIsImVtYWlsIjoiYXNkZmdAZ21haWwuY29tIiwidXNlclJvbGUiOjAsIm5hbWUiOiJkYW5hYiIsInNraWxscyI6IkhUTUwsIENTUywgSlMiLCJ1cGRhdGVkQXQiOiIyMDIxLTAyLTE0VDEwOjE0OjU3LjIyN1oiLCJjcmVhdGVkQXQiOiIyMDIxLTAyLTE0VDEwOjE0OjU3LjIyN1oiLCJpYXQiOjE2MTMyOTc2OTd9.iZ84csM5j2l4vy0s9eWbM3JjZNjv8JgomOR2i9uiArc"
+  },
+  "code": 201,
+  "success": true
+}

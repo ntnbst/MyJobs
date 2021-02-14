@@ -1,13 +1,68 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Google font import */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* variables */
+:root {
+  --font-primary: Lato, sans-serif;
+  --font-secondary: serif;
+
+  /* set base values */
+  --text-base-size: 1.6rem;
+
+  /* sizes 14, 16, 22, 60 */
+  --text-xs: 1.4rem;
+  --text-sm: 1.6rem;
+  --text-md: 2.2rem;
+  --text-xl: 6rem;
+
+  /* weight variables */
+  --weight-normal: 400;
+  --weight-bold: 600;
+  --weight-heavy: 700;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+/* global styles for dom elements */
+* {
+  box-sizing: border-box;
+  font-family: var(--font-primary), Helvetica, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: var(--text-base-size);
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: #fff;
+}
+
+/* typography */
+.text--xl {
+  font-size: var(--text-xl); /* 60px */
+}
+.text--md {
+  font-size: var(--text-md); /* 22px */
+}
+.text--sm {
+  font-size: var(--text-sm); /* 16px */
+}
+.text--xs {
+  font-size: var(--text-xs); /* 14px */
 }
